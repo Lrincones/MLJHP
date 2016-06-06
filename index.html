@@ -19,159 +19,397 @@
     </section>
 
     <section class="main-content">
-      <h1>
-<a id="---" class="anchor" href="#---" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>---</h1>
+      <p>&lt;!DOCTYPE html&gt;</p>
 
-<p>title: "Practical Machine Learning"
-author: "Luis Rincones"
-date: "6 June 2016"</p>
+<p></p>
 
-<h2>
-<a id="output-html_document" class="anchor" href="#output-html_document" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>output: html_document</h2>
+<p></p>
 
+<p>
+
+</p>
+
+<p></p>
+
+<p></p>Practical Machine Learning
+
+
+
+<p>
+</p>
+
+
+
+
+
+
+
+code{white-space: pre;}
+
+<p></p>
+
+
+
+
+  pre:not([class]) {
+    background-color: white;
+  }
+
+
+
+
+
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+
+
+<p></p>
+
+<p></p>
+
+
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+
+
+<div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="header">
+
+
+
+<h1>
+<a id="practical-machine-learning" class="anchor" href="#practical-machine-learning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Practical Machine Learning</h1>
+<h4>
+<a id="luis-rincones" class="anchor" href="#luis-rincones" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><em>Luis Rincones</em>
+</h4>
+<h4>
+<a id="6-june-2016" class="anchor" href="#6-june-2016" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><em>6 June 2016</em>
+</h4>
+
+</div>
+
+<div id="preparation">
 <h2>
 <a id="preparation" class="anchor" href="#preparation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Preparation</h2>
-
 <p>Prepare two data frames one for each file(training and testing)</p>
+<p>Background for the variable classe It corresponds to Unilateral Dumbbell Biceps Curl in five different fashions: according to the specification (Class A), throwing the elbows to the front (Class B), lifting the dumbbell only halfway (Class C), lowering the dumbbell only halfway (Class D) and throwing the hips to the front (Class E). Class A corresponds to the specified execution of the exercise, while the other 4 classes correspond to common mistakes. Generate an Histogram to see the frequencies of the classe variable.</p>
+<p>Eliminate the features with NA, from both sets(training and testing) Eliminate some features that don’t contribute to the model we are planning to create</p>
+</div>
 
-<p>Background for the variable classe
-It corresponds to Unilateral Dumbbell Biceps Curl in five different fashions: according to the specification (Class A), throwing the elbows to the front (Class B), lifting the dumbbell only halfway (Class C), lowering the dumbbell only halfway (Class D) and throwing the hips to the front (Class E). Class A corresponds to the specified execution of the exercise, while the other 4 classes correspond to common mistakes. 
-Generate an Histogram to see the frequencies of the classe variable.</p>
-
-<p>Eliminate the features with NA, from both sets(training and testing)
-Eliminate some features that don't contribute to the model we are planning to create</p>
-
+<div id="summary">
 <h2>
 <a id="summary" class="anchor" href="#summary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Summary</h2>
-
-<p>After reviewing the available information in the site for the "Human Activity Recognition", in particular the document available in
-"<a href="http://groupware.les.inf.puc-rio.br/public/papers/2013.Velloso.QAR-WLE.pdf">http://groupware.les.inf.puc-rio.br/public/papers/2013.Velloso.QAR-WLE.pdf</a>".
-The strategy was based in generating 4 subsets one for each sensor;
-ARM, BELT, DUMBBELLL and FOREARM.
-The goal was to seek the features that were common among all sensors with a significant contribution to their corresponding model. With this set of features, a new model will be created for prediction. Our requirements were to have a much smaller set of features than the original 159 (without classe). We would like to have fewer than 16 (an empiric number to make the computational times acceptable) </p>
-
+<p>After reviewing the available information in the site for the “Human Activity Recognition”, in particular the document available in “<a href="http://groupware.les.inf.puc-rio.br/public/papers/2013.Velloso.QAR-WLE.pdf">http://groupware.les.inf.puc-rio.br/public/papers/2013.Velloso.QAR-WLE.pdf</a>”. The strategy was based in generating 4 subsets one for each sensor; ARM, BELT, DUMBBELLL and FOREARM. The goal was to seek the features that were common among all sensors with a significant contribution to their corresponding model. With this set of features, a new model will be created for prediction. Our requirements were to have a much smaller set of features than the original 159 (without classe). We would like to have fewer than 16 (an empiric number to make the computational times acceptable)</p>
 <p>For each sensor a model was built the corresponding rfcv was used to assist in checking the model.</p>
+</div>
 
+<div id="libraries">
 <h2>
 <a id="libraries" class="anchor" href="#libraries" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Libraries</h2>
+<pre><code>library(caret)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>library(randomForest)</code></pre>
+<pre><code>## randomForest 4.6-12</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre><code>## 
+## Attaching package: 'randomForest'</code></pre>
+<pre><code>## The following object is masked from 'package:ggplot2':
+## 
+##     margin</code></pre>
+</div>
 
-<div class="highlight highlight-source-r"><pre>library(<span class="pl-smi">caret</span>)
-library(<span class="pl-smi">randomForest</span>)</pre></div>
-
+<div id="preparation-1">
 <h2>
 <a id="preparation-1" class="anchor" href="#preparation-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Preparation</h2>
-
 <p>After downloading the files and creating the Data Frames, generate an Histogram of the Variable classe for the training set.</p>
+<pre><code>set.seed(1947)
+download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", "training.csv")
+download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv", "testing.csv")
+training = read.csv("training.csv")
+testing = read.csv("testing.csv")
+barplot(summary(training$classe))</code></pre>
+<p><img title alt width="672"></p>
+<pre><code>count_na &lt;-sapply(training, function(y) sum(length(which(is.na(y)))))
+list_na &lt;- which(count_na &gt; 0) 
+training_small &lt;- training[,-list_na] 
+testing_small &lt;- testing[,-list_na]
+training_small &lt;- training_small[,-c(1,3:7)]
+testing_small &lt;- testing_small[,-c(1,3:7)]
+nombres &lt;- colnames(training_small)</code></pre>
+</div>
 
-<div class="highlight highlight-source-r"><pre>set.seed(<span class="pl-c1">1947</span>)
-download.file(<span class="pl-s"><span class="pl-pds">"</span>https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>training.csv<span class="pl-pds">"</span></span>)
-download.file(<span class="pl-s"><span class="pl-pds">"</span>https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>testing.csv<span class="pl-pds">"</span></span>)
-<span class="pl-v">training</span> <span class="pl-k">=</span> read.csv(<span class="pl-s"><span class="pl-pds">"</span>training.csv<span class="pl-pds">"</span></span>)
-<span class="pl-v">testing</span> <span class="pl-k">=</span> read.csv(<span class="pl-s"><span class="pl-pds">"</span>testing.csv<span class="pl-pds">"</span></span>)
-barplot(summary(<span class="pl-smi">training</span><span class="pl-k">$</span><span class="pl-smi">classe</span>))
-<span class="pl-smi">count_na</span> <span class="pl-k">&lt;-</span>sapply(<span class="pl-smi">training</span>, <span class="pl-k">function</span>(<span class="pl-smi">y</span>) sum(length(which(is.na(<span class="pl-smi">y</span>)))))
-<span class="pl-smi">list_na</span> <span class="pl-k">&lt;-</span> which(<span class="pl-smi">count_na</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>) 
-<span class="pl-smi">training_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training</span>[,<span class="pl-k">-</span><span class="pl-smi">list_na</span>] 
-<span class="pl-smi">testing_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">testing</span>[,<span class="pl-k">-</span><span class="pl-smi">list_na</span>]
-<span class="pl-smi">training_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-k">-</span>c(<span class="pl-c1">1</span>,<span class="pl-c1">3</span><span class="pl-k">:</span><span class="pl-c1">7</span>)]
-<span class="pl-smi">testing_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">testing_small</span>[,<span class="pl-k">-</span>c(<span class="pl-c1">1</span>,<span class="pl-c1">3</span><span class="pl-k">:</span><span class="pl-c1">7</span>)]
-<span class="pl-smi">nombres</span> <span class="pl-k">&lt;-</span> colnames(<span class="pl-smi">training_small</span>)</pre></div>
-
+<div id="sensors-data-frame">
 <h2>
 <a id="sensors-data-frame" class="anchor" href="#sensors-data-frame" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sensors Data Frame</h2>
+<p>As indicated before we will divide the training Data Frame in 4 sets with a smaller number of features each.</p>
+<pre><code>### Recall RandomForest 
+### Can not handle categorical predictors with more than 53 categories.
+# Sensor ARM
+temp &lt;- grep("_arm",nombres, ignore.case = TRUE)
+temp &lt;- append(temp, 87, after=length(temp))
+t_arm &lt;- training_small[,temp]
+count_factors &lt;- sapply(t_arm, function(y) which(nlevels(y) &lt;= 50))
+count_factors &lt;- as.logical(count_factors)
+count_factors[is.na(count_factors)] &lt;- FALSE
+t_arm_small &lt;- t_arm[,count_factors] 
+t_arm_modFit &lt;- randomForest(classe ~ ., t_arm_small, importance=TRUE)
+# Sensor BELT
+temp &lt;- grep("_belt",nombres, ignore.case = TRUE)
+temp &lt;- append(temp, 87, after=length(temp))
+t_belt &lt;- training_small[,temp]
+count_factors &lt;- sapply(t_belt, function(y) which(nlevels(y) &lt;= 50))
+count_factors &lt;- as.logical(count_factors)
+count_factors[is.na(count_factors)] &lt;- FALSE
+t_belt_small &lt;- t_belt[,count_factors] 
+t_belt_modFit &lt;- randomForest(classe ~ ., t_belt_small, importance=TRUE)
+# SENSOR DUMBBELLL
+temp &lt;- grep("_dumbbell",nombres, ignore.case = TRUE)
+temp &lt;- append(temp, 87, after=length(temp))
+t_dumbbell &lt;- training_small[,temp]
+count_factors &lt;- sapply(t_dumbbell, function(y) which(nlevels(y) &lt;= 50))
+count_factors &lt;- as.logical(count_factors)
+count_factors[is.na(count_factors)] &lt;- FALSE
+t_dumbbell_small &lt;- t_dumbbell[,count_factors] 
+t_dumbbell_modFit &lt;- randomForest(classe ~ ., t_dumbbell_small, importance=TRUE)
+# SENSOR FOREARM
+temp &lt;- grep("_forearm",nombres, ignore.case = TRUE)
+temp &lt;- append(temp, 87, after=length(temp))
+t_forearm &lt;- training_small[,temp]
+t_forearm &lt;- training_small[,temp]
+count_factors &lt;- sapply(t_forearm, function(y) which(nlevels(y) &lt;= 50))
+count_factors &lt;- as.logical(count_factors)
+count_factors[is.na(count_factors)] &lt;- FALSE
+t_forearm_small &lt;- t_forearm[,count_factors] 
+t_forearm_modFit &lt;- randomForest(classe ~ ., t_dumbbell_small, importance=TRUE)</code></pre>
+</div>
 
-<p>As indicated before we will divide the training Data Frame in  4 sets with a smaller number of features each.</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c">### Recall RandomForest </span>
-<span class="pl-c">### Can not handle categorical predictors with more than 53 categories.</span>
-<span class="pl-c"># Sensor ARM</span>
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> grep(<span class="pl-s"><span class="pl-pds">"</span>_arm<span class="pl-pds">"</span></span>,<span class="pl-smi">nombres</span>, <span class="pl-v">ignore.case</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> append(<span class="pl-smi">temp</span>, <span class="pl-c1">87</span>, <span class="pl-v">after</span><span class="pl-k">=</span>length(<span class="pl-smi">temp</span>))
-<span class="pl-smi">t_arm</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-smi">temp</span>]
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> sapply(<span class="pl-smi">t_arm</span>, <span class="pl-k">function</span>(<span class="pl-smi">y</span>) which(nlevels(<span class="pl-smi">y</span>) <span class="pl-k">&lt;</span><span class="pl-k">=</span> <span class="pl-c1">50</span>))
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> as.logical(<span class="pl-smi">count_factors</span>)
-<span class="pl-smi">count_factors</span>[is.na(<span class="pl-smi">count_factors</span>)] <span class="pl-k">&lt;-</span> <span class="pl-c1">FALSE</span>
-<span class="pl-smi">t_arm_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">t_arm</span>[,<span class="pl-smi">count_factors</span>] 
-<span class="pl-smi">t_arm_modFit</span> <span class="pl-k">&lt;-</span> randomForest(<span class="pl-smi">classe</span> <span class="pl-k">~</span> ., <span class="pl-smi">t_arm_small</span>, <span class="pl-v">importance</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
-<span class="pl-c"># Sensor BELT</span>
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> grep(<span class="pl-s"><span class="pl-pds">"</span>_belt<span class="pl-pds">"</span></span>,<span class="pl-smi">nombres</span>, <span class="pl-v">ignore.case</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> append(<span class="pl-smi">temp</span>, <span class="pl-c1">87</span>, <span class="pl-v">after</span><span class="pl-k">=</span>length(<span class="pl-smi">temp</span>))
-<span class="pl-smi">t_belt</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-smi">temp</span>]
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> sapply(<span class="pl-smi">t_belt</span>, <span class="pl-k">function</span>(<span class="pl-smi">y</span>) which(nlevels(<span class="pl-smi">y</span>) <span class="pl-k">&lt;</span><span class="pl-k">=</span> <span class="pl-c1">50</span>))
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> as.logical(<span class="pl-smi">count_factors</span>)
-<span class="pl-smi">count_factors</span>[is.na(<span class="pl-smi">count_factors</span>)] <span class="pl-k">&lt;-</span> <span class="pl-c1">FALSE</span>
-<span class="pl-smi">t_belt_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">t_belt</span>[,<span class="pl-smi">count_factors</span>] 
-<span class="pl-smi">t_belt_modFit</span> <span class="pl-k">&lt;-</span> randomForest(<span class="pl-smi">classe</span> <span class="pl-k">~</span> ., <span class="pl-smi">t_belt_small</span>, <span class="pl-v">importance</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
-<span class="pl-c"># SENSOR DUMBBELLL</span>
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> grep(<span class="pl-s"><span class="pl-pds">"</span>_dumbbell<span class="pl-pds">"</span></span>,<span class="pl-smi">nombres</span>, <span class="pl-v">ignore.case</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> append(<span class="pl-smi">temp</span>, <span class="pl-c1">87</span>, <span class="pl-v">after</span><span class="pl-k">=</span>length(<span class="pl-smi">temp</span>))
-<span class="pl-smi">t_dumbbell</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-smi">temp</span>]
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> sapply(<span class="pl-smi">t_dumbbell</span>, <span class="pl-k">function</span>(<span class="pl-smi">y</span>) which(nlevels(<span class="pl-smi">y</span>) <span class="pl-k">&lt;</span><span class="pl-k">=</span> <span class="pl-c1">50</span>))
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> as.logical(<span class="pl-smi">count_factors</span>)
-<span class="pl-smi">count_factors</span>[is.na(<span class="pl-smi">count_factors</span>)] <span class="pl-k">&lt;-</span> <span class="pl-c1">FALSE</span>
-<span class="pl-smi">t_dumbbell_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">t_dumbbell</span>[,<span class="pl-smi">count_factors</span>] 
-<span class="pl-smi">t_dumbbell_modFit</span> <span class="pl-k">&lt;-</span> randomForest(<span class="pl-smi">classe</span> <span class="pl-k">~</span> ., <span class="pl-smi">t_dumbbell_small</span>, <span class="pl-v">importance</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
-<span class="pl-c"># SENSOR FOREARM</span>
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> grep(<span class="pl-s"><span class="pl-pds">"</span>_forearm<span class="pl-pds">"</span></span>,<span class="pl-smi">nombres</span>, <span class="pl-v">ignore.case</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-<span class="pl-smi">temp</span> <span class="pl-k">&lt;-</span> append(<span class="pl-smi">temp</span>, <span class="pl-c1">87</span>, <span class="pl-v">after</span><span class="pl-k">=</span>length(<span class="pl-smi">temp</span>))
-<span class="pl-smi">t_forearm</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-smi">temp</span>]
-<span class="pl-smi">t_forearm</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-smi">temp</span>]
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> sapply(<span class="pl-smi">t_forearm</span>, <span class="pl-k">function</span>(<span class="pl-smi">y</span>) which(nlevels(<span class="pl-smi">y</span>) <span class="pl-k">&lt;</span><span class="pl-k">=</span> <span class="pl-c1">50</span>))
-<span class="pl-smi">count_factors</span> <span class="pl-k">&lt;-</span> as.logical(<span class="pl-smi">count_factors</span>)
-<span class="pl-smi">count_factors</span>[is.na(<span class="pl-smi">count_factors</span>)] <span class="pl-k">&lt;-</span> <span class="pl-c1">FALSE</span>
-<span class="pl-smi">t_forearm_small</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">t_forearm</span>[,<span class="pl-smi">count_factors</span>] 
-<span class="pl-smi">t_forearm_modFit</span> <span class="pl-k">&lt;-</span> randomForest(<span class="pl-smi">classe</span> <span class="pl-k">~</span> ., <span class="pl-smi">t_dumbbell_small</span>, <span class="pl-v">importance</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
-</pre></div>
-
+<div id="analysis">
 <h2>
 <a id="analysis" class="anchor" href="#analysis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Analysis</h2>
+<p>Review the features importance for each of the sensor’s set. Generate the Random Forest Cross-Validation for feature selection (rfcv)</p>
+<pre><code># Listing and Analyzing the features for each sensor's model
+sort(t_arm_modFit$importance[,7], decreasing = TRUE)</code></pre>
+<pre><code>##        roll_arm       pitch_arm    magnet_arm_y     accel_arm_z 
+##       1720.1569       1536.3274       1310.5750       1270.9586 
+##     accel_arm_x     gyros_arm_x         yaw_arm     accel_arm_y 
+##       1252.2595       1214.7045       1207.8117       1137.6990 
+##    magnet_arm_x    magnet_arm_z     gyros_arm_y     gyros_arm_z 
+##       1135.8495       1116.9050       1109.3780        780.5063 
+## total_accel_arm 
+##        711.9776</code></pre>
+<pre><code>sort(t_belt_modFit$importance[,7], decreasing = TRUE)</code></pre>
+<pre><code>##           yaw_belt          roll_belt         pitch_belt 
+##        2782.277719        2542.377062        2431.801487 
+##      magnet_belt_z      magnet_belt_x       accel_belt_z 
+##        1153.712177        1140.890074        1093.722168 
+##      magnet_belt_y       gyros_belt_z       gyros_belt_x 
+##         929.434523         842.218195         678.324468 
+##       accel_belt_x       accel_belt_y       gyros_belt_y 
+##         665.344422         452.325353         389.975824 
+##   total_accel_belt amplitude_yaw_belt  skewness_yaw_belt 
+##         381.582793           6.974285           6.806856 
+##  kurtosis_yaw_belt 
+##           6.662137</code></pre>
+<pre><code>sort(t_dumbbell_modFit$importance[,7], decreasing = TRUE)</code></pre>
+<pre><code>##      magnet_dumbbell_z      magnet_dumbbell_y      magnet_dumbbell_x 
+##            2602.824426            1811.853996            1528.535732 
+##       accel_dumbbell_z       accel_dumbbell_y       gyros_dumbbell_y 
+##            1288.742407            1146.505316            1102.754306 
+##          roll_dumbbell           yaw_dumbbell       gyros_dumbbell_x 
+##            1085.925055             889.959352             862.975661 
+##   total_accel_dumbbell       accel_dumbbell_x         pitch_dumbbell 
+##             849.874367             798.822558             776.319077 
+##       gyros_dumbbell_z  kurtosis_yaw_dumbbell amplitude_yaw_dumbbell 
+##             693.740856               5.391307               5.239492 
+##  skewness_yaw_dumbbell 
+##               5.206067</code></pre>
+<pre><code>sort(t_forearm_modFit$importance[,7], decreasing = TRUE)</code></pre>
+<pre><code>##      magnet_dumbbell_z      magnet_dumbbell_y      magnet_dumbbell_x 
+##            2581.662152            1832.210619            1538.067876 
+##       accel_dumbbell_z       accel_dumbbell_y       gyros_dumbbell_y 
+##            1277.299596            1123.995936            1104.759780 
+##          roll_dumbbell           yaw_dumbbell       gyros_dumbbell_x 
+##            1099.798980             889.528859             871.290392 
+##   total_accel_dumbbell         pitch_dumbbell       accel_dumbbell_x 
+##             865.124586             780.282486             776.677311 
+##       gyros_dumbbell_z amplitude_yaw_dumbbell  kurtosis_yaw_dumbbell 
+##             696.887315               5.259698               5.211563 
+##  skewness_yaw_dumbbell 
+##               5.142593</code></pre>
+<pre><code>colnames(t_arm_small)</code></pre>
+<pre><code>##  [1] "roll_arm"        "pitch_arm"       "yaw_arm"        
+##  [4] "total_accel_arm" "gyros_arm_x"     "gyros_arm_y"    
+##  [7] "gyros_arm_z"     "accel_arm_x"     "accel_arm_y"    
+## [10] "accel_arm_z"     "magnet_arm_x"    "magnet_arm_y"   
+## [13] "magnet_arm_z"    "classe"</code></pre>
+<pre><code>colnames(t_belt_small)</code></pre>
+<pre><code>##  [1] "roll_belt"          "pitch_belt"         "yaw_belt"          
+##  [4] "total_accel_belt"   "kurtosis_yaw_belt"  "skewness_yaw_belt" 
+##  [7] "amplitude_yaw_belt" "gyros_belt_x"       "gyros_belt_y"      
+## [10] "gyros_belt_z"       "accel_belt_x"       "accel_belt_y"      
+## [13] "accel_belt_z"       "magnet_belt_x"      "magnet_belt_y"     
+## [16] "magnet_belt_z"      "classe"</code></pre>
+<pre><code>colnames(t_dumbbell_small)</code></pre>
+<pre><code>##  [1] "roll_dumbbell"          "pitch_dumbbell"        
+##  [3] "yaw_dumbbell"           "kurtosis_yaw_dumbbell" 
+##  [5] "skewness_yaw_dumbbell"  "amplitude_yaw_dumbbell"
+##  [7] "total_accel_dumbbell"   "gyros_dumbbell_x"      
+##  [9] "gyros_dumbbell_y"       "gyros_dumbbell_z"      
+## [11] "accel_dumbbell_x"       "accel_dumbbell_y"      
+## [13] "accel_dumbbell_z"       "magnet_dumbbell_x"     
+## [15] "magnet_dumbbell_y"      "magnet_dumbbell_z"     
+## [17] "classe"</code></pre>
+<pre><code>colnames(t_forearm_small)</code></pre>
+<pre><code>##  [1] "roll_forearm"          "pitch_forearm"        
+##  [3] "yaw_forearm"           "kurtosis_yaw_forearm" 
+##  [5] "skewness_yaw_forearm"  "max_yaw_forearm"      
+##  [7] "min_yaw_forearm"       "amplitude_yaw_forearm"
+##  [9] "total_accel_forearm"   "gyros_forearm_x"      
+## [11] "gyros_forearm_y"       "gyros_forearm_z"      
+## [13] "accel_forearm_x"       "accel_forearm_y"      
+## [15] "accel_forearm_z"       "magnet_forearm_x"     
+## [17] "magnet_forearm_y"      "magnet_forearm_z"     
+## [19] "classe"</code></pre>
+<pre><code>t_arm_rfcv &lt;- rfcv(trainx=t_arm_small[,-14], trainy = t_arm_small[,14], scale = "log", step=0.5)
+t_belt_rfcv &lt;- rfcv(trainx=t_belt_small[,-17], trainy = t_belt_small[,17], scale = "log", step=0.5)
+t_dumbbell_rfcv &lt;- rfcv(trainx=t_dumbbell_small[,-17], trainy = t_dumbbell_small[,17], scale = "log", step=0.5)
+t_forearm_rfcv &lt;- rfcv(trainx=t_forearm_small[,-19], trainy = t_forearm_small[,19], scale = "log", step=0.5)</code></pre>
+</div>
 
-<p>Review the features importance for each of the sensor's set.
-Generate the Random Forest Cross-Validation for feature selection (rfcv)</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c"># Listing and Analyzing the features for each sensor's model</span>
-sort(<span class="pl-smi">t_arm_modFit</span><span class="pl-k">$</span><span class="pl-smi">importance</span>[,<span class="pl-c1">7</span>], <span class="pl-v">decreasing</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-sort(<span class="pl-smi">t_belt_modFit</span><span class="pl-k">$</span><span class="pl-smi">importance</span>[,<span class="pl-c1">7</span>], <span class="pl-v">decreasing</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-sort(<span class="pl-smi">t_dumbbell_modFit</span><span class="pl-k">$</span><span class="pl-smi">importance</span>[,<span class="pl-c1">7</span>], <span class="pl-v">decreasing</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-sort(<span class="pl-smi">t_forearm_modFit</span><span class="pl-k">$</span><span class="pl-smi">importance</span>[,<span class="pl-c1">7</span>], <span class="pl-v">decreasing</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-colnames(<span class="pl-smi">t_arm_small</span>)
-colnames(<span class="pl-smi">t_belt_small</span>)
-colnames(<span class="pl-smi">t_dumbbell_small</span>)
-colnames(<span class="pl-smi">t_forearm_small</span>)
-<span class="pl-smi">t_arm_rfcv</span> <span class="pl-k">&lt;-</span> rfcv(<span class="pl-v">trainx</span><span class="pl-k">=</span><span class="pl-smi">t_arm_small</span>[,<span class="pl-k">-</span><span class="pl-c1">14</span>], <span class="pl-v">trainy</span> <span class="pl-k">=</span> <span class="pl-smi">t_arm_small</span>[,<span class="pl-c1">14</span>], <span class="pl-v">scale</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>log<span class="pl-pds">"</span></span>, <span class="pl-v">step</span><span class="pl-k">=</span><span class="pl-c1">0.5</span>)
-<span class="pl-smi">t_belt_rfcv</span> <span class="pl-k">&lt;-</span> rfcv(<span class="pl-v">trainx</span><span class="pl-k">=</span><span class="pl-smi">t_belt_small</span>[,<span class="pl-k">-</span><span class="pl-c1">17</span>], <span class="pl-v">trainy</span> <span class="pl-k">=</span> <span class="pl-smi">t_belt_small</span>[,<span class="pl-c1">17</span>], <span class="pl-v">scale</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>log<span class="pl-pds">"</span></span>, <span class="pl-v">step</span><span class="pl-k">=</span><span class="pl-c1">0.5</span>)
-<span class="pl-smi">t_dumbbell_rfcv</span> <span class="pl-k">&lt;-</span> rfcv(<span class="pl-v">trainx</span><span class="pl-k">=</span><span class="pl-smi">t_dumbbell_small</span>[,<span class="pl-k">-</span><span class="pl-c1">17</span>], <span class="pl-v">trainy</span> <span class="pl-k">=</span> <span class="pl-smi">t_dumbbell_small</span>[,<span class="pl-c1">17</span>], <span class="pl-v">scale</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>log<span class="pl-pds">"</span></span>, <span class="pl-v">step</span><span class="pl-k">=</span><span class="pl-c1">0.5</span>)
-<span class="pl-smi">t_forearm_rfcv</span> <span class="pl-k">&lt;-</span> rfcv(<span class="pl-v">trainx</span><span class="pl-k">=</span><span class="pl-smi">t_forearm_small</span>[,<span class="pl-k">-</span><span class="pl-c1">19</span>], <span class="pl-v">trainy</span> <span class="pl-k">=</span> <span class="pl-smi">t_forearm_small</span>[,<span class="pl-c1">19</span>], <span class="pl-v">scale</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>log<span class="pl-pds">"</span></span>, <span class="pl-v">step</span><span class="pl-k">=</span><span class="pl-c1">0.5</span>)</pre></div>
-
+<div id="final-model">
 <h2>
 <a id="final-model" class="anchor" href="#final-model" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Final Model</h2>
+<p>After the analysis, the features we found as significant and common were the “magnet” for each of the 3 dimensions(x,y,z) and from each of the four sensors. Those had the more consistent behavior with our goals We now create a training set with only those features. It is important to mention that for the belt sensor, the magnet group were the second set of features, the first 3 places were (yaw_belt, roll_belt and pitch_belt). For lack of time, considering this as part of the Final Model, will be done in future versions.</p>
+<pre><code># after analysis the features chosen as a common group were
+temp1 &lt;- grep("magnet",nombres, ignore.case = TRUE)
+temp1 &lt;- grep("magnet",nombres, ignore.case = TRUE)
+temp1 &lt;- append(temp1, 87, after=length(temp1))
+t_final &lt;- training_small[,temp1]
+dim(t_final)</code></pre>
+<pre><code>## [1] 19622    13</code></pre>
+<pre><code>colnames(t_final)</code></pre>
+<pre><code>##  [1] "magnet_belt_x"     "magnet_belt_y"     "magnet_belt_z"    
+##  [4] "magnet_arm_x"      "magnet_arm_y"      "magnet_arm_z"     
+##  [7] "magnet_dumbbell_x" "magnet_dumbbell_y" "magnet_dumbbell_z"
+## [10] "magnet_forearm_x"  "magnet_forearm_y"  "magnet_forearm_z" 
+## [13] "classe"</code></pre>
+<pre><code>t_final_modFit &lt;- randomForest(classe ~ ., t_final, importance=TRUE)
+t_final_modFit$confusion</code></pre>
+<pre><code>##      A    B    C    D    E class.error
+## A 5532   17   11   16    4 0.008602151
+## B  102 3587   49   38   21 0.055306821
+## C   21   51 3328   14    8 0.027469316
+## D   28   12   90 3067   19 0.046330846
+## E    8   30   17   30 3522 0.023565290</code></pre>
+<pre><code>t_final_modFit$importance</code></pre>
+<pre><code>##                           A          B          C          D          E
+## magnet_belt_x     0.1378058 0.14624219 0.15808035 0.21913892 0.08587806
+## magnet_belt_y     0.1408096 0.15231764 0.18755163 0.21039402 0.19030819
+## magnet_belt_z     0.1586239 0.18185313 0.20388370 0.22883656 0.16490680
+## magnet_arm_x      0.2166282 0.09620763 0.13318798 0.16086667 0.08429880
+## magnet_arm_y      0.1338848 0.11290374 0.13898982 0.18946886 0.09248110
+## magnet_arm_z      0.1134260 0.08920900 0.08366583 0.07212268 0.04389458
+## magnet_dumbbell_x 0.2913579 0.19858214 0.30809218 0.26859646 0.13701659
+## magnet_dumbbell_y 0.2735148 0.23008786 0.31988456 0.26645577 0.14720893
+## magnet_dumbbell_z 0.2973680 0.23391981 0.32222205 0.32947302 0.16220276
+## magnet_forearm_x  0.1999252 0.07404572 0.11073831 0.13976640 0.10660586
+## magnet_forearm_y  0.1299058 0.08172935 0.11683743 0.11416196 0.07053082
+## magnet_forearm_z  0.1195485 0.09657979 0.12719856 0.14389430 0.07393205
+##                   MeanDecreaseAccuracy MeanDecreaseGini
+## magnet_belt_x               0.14673088        1280.6762
+## magnet_belt_y               0.17168533        1466.5473
+## magnet_belt_z               0.18364143        1567.4332
+## magnet_arm_x                0.14528848         932.8538
+## magnet_arm_y                0.13219556         966.6756
+## magnet_arm_z                0.08398821         812.4728
+## magnet_dumbbell_x           0.24418122        1616.1607
+## magnet_dumbbell_y           0.24878596        1755.4010
+## magnet_dumbbell_z           0.26979029        2141.3803
+## magnet_forearm_x            0.13298110        1022.1820
+## magnet_forearm_y            0.10478723         891.0254
+## magnet_forearm_z            0.11201122        1060.0730</code></pre>
+<pre><code>t_rfcv &lt;- rfcv(trainx=t_final[,-13], trainy = t_final[,13], scale = "log", step=0.7)
+t_rfcv$error.cv</code></pre>
+<pre><code>##         12          8          6          4          3          2 
+## 0.03338090 0.06462134 0.09519927 0.21501376 0.32325961 0.38222403 
+##          1 
+## 0.59642238</code></pre>
+</div>
 
-<p>After the analysis, the features we found as significant and common were the "magnet" for each of the 3 dimensions(x,y,z) and from each of the four sensors. Those had the more consistent behavior with our goals
-We now create a training set with only those features. 
-It is important to mention that for the belt sensor, the magnet group were the second set of features, the first 3 places were (yaw_belt, roll_belt and pitch_belt). 
-For lack of time, considering this as part of the Final Model, will be done in future versions.</p>
-
-<div class="highlight highlight-source-r"><pre><span class="pl-c"># after analysis the features chosen as a common group were</span>
-<span class="pl-smi">temp1</span> <span class="pl-k">&lt;-</span> grep(<span class="pl-s"><span class="pl-pds">"</span>magnet<span class="pl-pds">"</span></span>,<span class="pl-smi">nombres</span>, <span class="pl-v">ignore.case</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-<span class="pl-smi">temp1</span> <span class="pl-k">&lt;-</span> grep(<span class="pl-s"><span class="pl-pds">"</span>magnet<span class="pl-pds">"</span></span>,<span class="pl-smi">nombres</span>, <span class="pl-v">ignore.case</span> <span class="pl-k">=</span> <span class="pl-c1">TRUE</span>)
-<span class="pl-smi">temp1</span> <span class="pl-k">&lt;-</span> append(<span class="pl-smi">temp1</span>, <span class="pl-c1">87</span>, <span class="pl-v">after</span><span class="pl-k">=</span>length(<span class="pl-smi">temp1</span>))
-<span class="pl-smi">t_final</span> <span class="pl-k">&lt;-</span> <span class="pl-smi">training_small</span>[,<span class="pl-smi">temp1</span>]
-dim(<span class="pl-smi">t_final</span>)
-colnames(<span class="pl-smi">t_final</span>)
-<span class="pl-smi">t_final_modFit</span> <span class="pl-k">&lt;-</span> randomForest(<span class="pl-smi">classe</span> <span class="pl-k">~</span> ., <span class="pl-smi">t_final</span>, <span class="pl-v">importance</span><span class="pl-k">=</span><span class="pl-c1">TRUE</span>)
-<span class="pl-smi">t_final_modFit</span><span class="pl-k">$</span><span class="pl-smi">confusion</span>
-<span class="pl-smi">t_final_modFit</span><span class="pl-k">$</span><span class="pl-smi">importance</span>
-<span class="pl-smi">t_rfcv</span> <span class="pl-k">&lt;-</span> rfcv(<span class="pl-v">trainx</span><span class="pl-k">=</span><span class="pl-smi">t_final</span>[,<span class="pl-k">-</span><span class="pl-c1">13</span>], <span class="pl-v">trainy</span> <span class="pl-k">=</span> <span class="pl-smi">t_final</span>[,<span class="pl-c1">13</span>], <span class="pl-v">scale</span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span>log<span class="pl-pds">"</span></span>, <span class="pl-v">step</span><span class="pl-k">=</span><span class="pl-c1">0.7</span>)
-<span class="pl-smi">t_rfcv</span><span class="pl-k">$</span><span class="pl-smi">error.cv</span></pre></div>
-
+<div id="prediction">
 <h2>
 <a id="prediction" class="anchor" href="#prediction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prediction</h2>
+<p>As required the prediction using the testing as newdata. Results are indicate below.</p>
+<pre><code>t_prediction &lt;- predict(t_final_modFit, newdata = testing_small)
+t_prediction</code></pre>
+<pre><code>##  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 
+##  B  A  B  A  A  E  D  B  A  A  B  C  B  A  E  E  A  B  B  B 
+## Levels: A B C D E</code></pre>
+</div>
 
-<p>As required the prediction using the testing as newdata.
-Results are indicate below.</p>
+<p></p>
+</div>
 
-<div class="highlight highlight-source-r"><pre><span class="pl-smi">t_prediction</span> <span class="pl-k">&lt;-</span> predict(<span class="pl-smi">t_final_modFit</span>, <span class="pl-v">newdata</span> <span class="pl-k">=</span> <span class="pl-smi">testing_small</span>)
-<span class="pl-smi">t_prediction</span></pre></div>
+
+
+
+
+
+
+<p>
+</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/Lrincones/MLJHP">Mljhp</a> is maintained by <a href="https://github.com/Lrincones">Lrincones</a>.</span>
