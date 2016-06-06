@@ -1,0 +1,137 @@
+---
+title: "Practical Machine Learning"
+author: "Luis Rincones"
+date: "6 June 2016"
+output: html_document
+---
+## Preparation  
+Prepare two data frames one for each file(training and testing)
+
+Background for the variable classe
+It corresponds to Unilateral Dumbbell Biceps Curl in five different fashions: according to the specification (Class A), throwing the elbows to the front (Class B), lifting the dumbbell only halfway (Class C), lowering the dumbbell only halfway (Class D) and throwing the hips to the front (Class E). Class A corresponds to the specified execution of the exercise, while the other 4 classes correspond to common mistakes. 
+Generate an Histogram to see the frequencies of the classe variable.
+
+Eliminate the features with NA, from both sets(training and testing)
+Eliminate some features that don't contribute to the model we are planning to create
+
+## Summary
+After reviewing the available information in the site for the "Human Activity Recognition", in particular the document available in
+"http://groupware.les.inf.puc-rio.br/public/papers/2013.Velloso.QAR-WLE.pdf".
+The strategy was based in generating 4 subsets one for each sensor;
+ARM, BELT, DUMBBELLL and FOREARM.
+The goal was to seek the features that were common among all sensors with a significant contribution to their corresponding model. With this set of features, a new model will be created for prediction. Our requirements were to have a much smaller set of features than the original 159 (without classe). We would like to have fewer than 16 (an empiric number to make the computational times acceptable) 
+
+For each sensor a model was built the corresponding rfcv was used to assist in checking the model.
+
+## Libraries
+```{r libraries}
+library(caret)
+library(randomForest)
+```
+
+## Preparation
+After downloading the files and creating the Data Frames, generate an Histogram of the Variable classe for the training set.
+```{r preparation}
+set.seed(1947)
+download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-training.csv", "training.csv")
+download.file("https://d396qusza40orc.cloudfront.net/predmachlearn/pml-testing.csv", "testing.csv")
+training = read.csv("training.csv")
+testing = read.csv("testing.csv")
+barplot(summary(training$classe))
+count_na <-sapply(training, function(y) sum(length(which(is.na(y)))))
+list_na <- which(count_na > 0) 
+training_small <- training[,-list_na] 
+testing_small <- testing[,-list_na]
+training_small <- training_small[,-c(1,3:7)]
+testing_small <- testing_small[,-c(1,3:7)]
+nombres <- colnames(training_small)
+```
+## Sensors Data Frame
+As indicated before we will divide the training Data Frame in  4 sets with a smaller number of features each.
+```{r Sensors_Data_Sets}
+### Recall RandomForest 
+### Can not handle categorical predictors with more than 53 categories.
+# Sensor ARM
+temp <- grep("_arm",nombres, ignore.case = TRUE)
+temp <- append(temp, 87, after=length(temp))
+t_arm <- training_small[,temp]
+count_factors <- sapply(t_arm, function(y) which(nlevels(y) <= 50))
+count_factors <- as.logical(count_factors)
+count_factors[is.na(count_factors)] <- FALSE
+t_arm_small <- t_arm[,count_factors] 
+t_arm_modFit <- randomForest(classe ~ ., t_arm_small, importance=TRUE)
+# Sensor BELT
+temp <- grep("_belt",nombres, ignore.case = TRUE)
+temp <- append(temp, 87, after=length(temp))
+t_belt <- training_small[,temp]
+count_factors <- sapply(t_belt, function(y) which(nlevels(y) <= 50))
+count_factors <- as.logical(count_factors)
+count_factors[is.na(count_factors)] <- FALSE
+t_belt_small <- t_belt[,count_factors] 
+t_belt_modFit <- randomForest(classe ~ ., t_belt_small, importance=TRUE)
+# SENSOR DUMBBELLL
+temp <- grep("_dumbbell",nombres, ignore.case = TRUE)
+temp <- append(temp, 87, after=length(temp))
+t_dumbbell <- training_small[,temp]
+count_factors <- sapply(t_dumbbell, function(y) which(nlevels(y) <= 50))
+count_factors <- as.logical(count_factors)
+count_factors[is.na(count_factors)] <- FALSE
+t_dumbbell_small <- t_dumbbell[,count_factors] 
+t_dumbbell_modFit <- randomForest(classe ~ ., t_dumbbell_small, importance=TRUE)
+# SENSOR FOREARM
+temp <- grep("_forearm",nombres, ignore.case = TRUE)
+temp <- append(temp, 87, after=length(temp))
+t_forearm <- training_small[,temp]
+t_forearm <- training_small[,temp]
+count_factors <- sapply(t_forearm, function(y) which(nlevels(y) <= 50))
+count_factors <- as.logical(count_factors)
+count_factors[is.na(count_factors)] <- FALSE
+t_forearm_small <- t_forearm[,count_factors] 
+t_forearm_modFit <- randomForest(classe ~ ., t_dumbbell_small, importance=TRUE)
+
+```
+## Analysis
+Review the features importance for each of the sensor's set.
+Generate the Random Forest Cross-Validation for feature selection (rfcv)
+```{r Analyzing_Sensors_Model}
+# Listing and Analyzing the features for each sensor's model
+sort(t_arm_modFit$importance[,7], decreasing = TRUE)
+sort(t_belt_modFit$importance[,7], decreasing = TRUE)
+sort(t_dumbbell_modFit$importance[,7], decreasing = TRUE)
+sort(t_forearm_modFit$importance[,7], decreasing = TRUE)
+colnames(t_arm_small)
+colnames(t_belt_small)
+colnames(t_dumbbell_small)
+colnames(t_forearm_small)
+t_arm_rfcv <- rfcv(trainx=t_arm_small[,-14], trainy = t_arm_small[,14], scale = "log", step=0.5)
+t_belt_rfcv <- rfcv(trainx=t_belt_small[,-17], trainy = t_belt_small[,17], scale = "log", step=0.5)
+t_dumbbell_rfcv <- rfcv(trainx=t_dumbbell_small[,-17], trainy = t_dumbbell_small[,17], scale = "log", step=0.5)
+t_forearm_rfcv <- rfcv(trainx=t_forearm_small[,-19], trainy = t_forearm_small[,19], scale = "log", step=0.5)
+```
+## Final Model
+After the analysis, the features we found as significant and common were the "magnet" for each of the 3 dimensions(x,y,z) and from each of the four sensors. Those had the more consistent behavior with our goals
+We now create a training set with only those features. 
+It is important to mention that for the belt sensor, the magnet group were the second set of features, the first 3 places were (yaw_belt, roll_belt and pitch_belt). 
+For lack of time, considering this as part of the Final Model, will be done in future versions.
+```{r Final Model}
+# after analysis the features chosen as a common group were
+temp1 <- grep("magnet",nombres, ignore.case = TRUE)
+temp1 <- grep("magnet",nombres, ignore.case = TRUE)
+temp1 <- append(temp1, 87, after=length(temp1))
+t_final <- training_small[,temp1]
+dim(t_final)
+colnames(t_final)
+t_final_modFit <- randomForest(classe ~ ., t_final, importance=TRUE)
+t_final_modFit$confusion
+t_final_modFit$importance
+t_rfcv <- rfcv(trainx=t_final[,-13], trainy = t_final[,13], scale = "log", step=0.7)
+t_rfcv$error.cv
+```
+## Prediction
+As required the prediction using the testing as newdata.
+Results are indicate below.
+```{r Prediction }
+t_prediction <- predict(t_final_modFit, newdata = testing_small)
+t_prediction
+```
+
